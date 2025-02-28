@@ -8,6 +8,11 @@ from flask_bcrypt import Bcrypt
 from flask_mail import Mail, Message
 import secrets
 from datetime import datetime
+from dotenv import load_dotenv
+import os
+
+# Load environment variables from .env
+load_dotenv()
 
 popular_df = pickle.load(open('popular.pkl', 'rb'))
 pt = pickle.load(open('pt.pkl', 'rb'))
@@ -18,16 +23,17 @@ app = Flask(__name__)
 bcrypt = Bcrypt(app)
 
 # Configure the MySQL database connection
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root12@localhost/bookai'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 mail = Mail(app)
 
-app.config['MAIL_SERVER'] = 'smtp.gmail.com'
-app.config['MAIL_PORT'] = 587
-app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USE_SSL'] = False
-app.config['MAIL_USERNAME'] = 'www.malcolmdsouza9552@gmail.com'
-app.config['MAIL_PASSWORD'] = 'smkm qokk rfik mqlk'
+app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER')
+app.config['MAIL_PORT'] = int(os.getenv('MAIL_PORT'))
+app.config['MAIL_USE_TLS'] = os.getenv('MAIL_USE_TLS') == 'True'
+app.config['MAIL_USE_SSL'] = os.getenv('MAIL_USE_SSL') == 'True'
+app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
+app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
 
 
 class User(db.Model):
