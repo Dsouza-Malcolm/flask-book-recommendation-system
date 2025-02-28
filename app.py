@@ -428,5 +428,5 @@ def placeOrder():
 
 
 if __name__ == '__main__':
-    app.secret_key = "r)u'L4i<X&U;T4Pk*)#4,S3\(Okje?+5"
+    app.secret_key = os.getenv('SECRET_KEY')
     app.run(debug=True)
