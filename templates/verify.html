@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Email Verification</title>
+    <link rel="stylesheet" href="/static/style.css" />
+    <style>
+      body {
+        background-color: #f0f5f9;
+        /* text-align: center; */
+        color: #c9d6df;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .container {
+        display: flex;
+        justify-content: space-between;
+        background-color: #52616b;
+        border-radius: 10px;
+        margin: 20px auto;
+        padding: 20px;
+        max-width: 600px;
+        min-height: 350px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+      }
+      .container:hover {
+        transform: scale(1.05);
+      }
+      h1 {
+        color: #c9d6df;
+        font-size: 1.6rem;
+        margin-bottom: 0.5rem;
+      }
+      p {
+        color: #c9d6df;
+        font-size: 0.9rem;
+      }
+      .success-message {
+        color: #4caf50;
+      }
+      .error-message {
+        color: #ff5733;
+      }
+      .otp-input {
+        margin: 20px 0;
+        margin-bottom: 40px;
+        padding: 0.5rem;
+        border: 1px solid #c9d6df;
+        border-radius: 5px;
+        width: 100%;
+        font-size: 0.9rem;
+        transition: border-color 0.3s;
+      }
+      .otp-input:focus {
+        border-color: #52616b;
+        outline: none;
+      }
+      .verify-button {
+        background-color: #1e2022;
+        color: #c9d6df;
+        border: 2px solid transparent;
+        border-radius: 5px;
+        padding: 0.5em 0.9em;
+        font-size: 0.9rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .verify-button:hover {
+        color: #f0f5f9;
+      }
+
+      .verify-img {
+        width: 40%;
+        border-bottom-left-radius: 10px;
+        border-top-left-radius: 10px;
+      }
+      .right-verify-block {
+        width: 55%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <img
+        src="/static/img/janko-ferlic-sfL_QOnmy00-unsplash.jpg"
+        alt="Book She"
+        class="verify-img"
+      />
+      <div class="right-verify-block">
+        <a
+          style="justify-content: left; text-decoration: none"
+          class="logo-block"
+          href="/"
+        >
+          <img src="/static/logoNew.png" class="nav-logo" alt="logo" />
+          <span style="color: #f0f5f9" class="navbar-brand">
+            Book<span class="lgt-grey">Wise</span>
+          </span>
+        </a>
+        <div>
+          <h1>Email Verification</h1>
+          <p>Please enter the OTP sent to your email:</p>
+          <form action="/verify_email" method="post">
+            <input
+              class="otp-input"
+              type="text"
+              placeholder="Enter OTP"
+              name="otp"
+              required
+            />
+            <button class="verify-button" type="submit">Verify Email</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,127 @@
+.overflow-hidden {
+  overflow: hidden;
+}
+.block {
+  display: block;
+}
+.none {
+  display: none;
+}
+.cursor {
+  cursor: pointer;
+}
+.modal {
+  position: relative;
+}
+.window-popper {
+  position: absolute;
+  height: 100vh;
+  width: 100%;
+  top: 0;
+  left: 0;
+  bottom: 0;
+
+  z-index: 99;
+}
+.window-container {
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background-color: rgba(201, 214, 223, 0.2);
+}
+.window {
+  display: flex;
+  background-color: #f0f5f9;
+  width: 60%;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+    rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}
+
+.window-left {
+  width: 30%;
+  padding-right: 10px;
+  border-right: 1px solid #c9d6df;
+}
+.window-left img {
+  height: 220px;
+}
+.window-left h2 {
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin-top: 10px;
+}
+.window-left p {
+  font-size: 0.9rem;
+}
+
+.window-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 70%;
+}
+
+.window-book-img {
+  width: 100%;
+}
+.window-right h3 {
+  margin: 0 1rem;
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+#window-summary {
+  font-size: 0.9rem;
+  margin: 0 1rem;
+  margin-top: 8px;
+}
+#buy-now-btn {
+  font-size: 0.8rem;
+  margin: 0 1rem;
+  padding: 0.5em 1em;
+  /* background-color: #52616b; */
+  background-color: #c9d6df;
+
+  /* color: #f0f5f9; */
+  /* border: none; */
+  border: 1px solid #52616b;
+  border-radius: 6px;
+}
+#buy-now-btn:hover {
+  background-color: #f0f5f9;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
+    rgba(17, 17, 26, 0.05) 0px 8px 32px;
+}
+.window-close {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 40px;
+  width: 40px;
+  border: none;
+  border-top-right-radius: 6px;
+  z-index: 999;
+}
+
+.window-close span {
+  font-size: 1.8rem;
+  rotate: 45deg;
+  color: #52616b;
+  cursor: pointer;
+}
+.window-close span:hover {
+  color: #1e2022;
+}

@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Place Order - BookWise</title>
+    <link rel="stylesheet" href="/static/style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        background-color: var(--lgt-gry);
+      }
+      .navbar-brand {
+        color: var(--vdrk-gry);
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header py-12">
+      <a class="logo-block" href="/">
+        <img src="/static/logoNew.png" class="nav-logo" alt="logo" />
+        <span class="navbar-brand text-3xl font-bold">
+          Book<span class="lgt-grey">Wise</span>
+        </span>
+      </a>
+    </header>
+
+    <section class="place-order-region">
+      <div class="wrapper">
+        <h2 class="text-lg">Review your Order</h2>
+        <form action="/placeOrder" method="post" class="place-order-form">
+          <div class="container flex flex-wrap px-6 py-8 pb-16 justify-between">
+            <div class="column-left w-3/5 pr-12">
+              <div class="form-grp">
+                <label
+                  class="leading-7 text-sm text-gray-600 block"
+                  for="address"
+                  >Shipping Address:</label
+                >
+                <textarea
+                  name="address"
+                  rows="2"
+                  cols="50"
+                  class="w-full bg-gray-100 bg-opacity-50 rounded focus:ring-2 focus:ring-indigo-200 focus:bg-transparent border border-gray-300 focus:border-indigo-500 text-sm outline-none text-gray-700 py-0.5 px-1 leading-8 transition-colors duration-200 ease-in-out"
+                  type="text"
+                >
+...</textarea
+                >
+              </div>
+              <div class="form-grp mt-4">
+                <span class="leading-7 text-sm text-gray-600 block"
+                  >Purchase Method</span
+                >
+                <div class="relative inline-block">
+                  <select
+                    id="purchase-method"
+                    name="purchase-method"
+                    class="vdrk-gry rounded border appearance-none border-gray-300 py-1.5 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 text-sm pl-2 pr-8"
+                  >
+                    <option value="COD">COD</option>
+                    <option value="UPI">UPI</option>
+                    <option value="Netbanking">Netbanking</option>
+                    <option value="Card">Card</option>
+                  </select>
+                  <span
+                    class="absolute right-0 top-0 h-full w-10 text-center text-gray-600 pointer-events-none flex items-center justify-center"
+                  >
+                    <svg
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      class="w-4 h-4"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M6 9l6 6 6-6"></path>
+                    </svg>
+                  </span>
+                </div>
+              </div>
+              <div class="form-grp mt-4">
+                <span class="leading-7 text-sm text-gray-600 block"
+                  >Shipping Method</span
+                >
+                <div class="relative inline-block">
+                  <select
+                    id="shipping-method"
+                    name="shipping-method"
+                    class="vdrk-gry rounded border appearance-none border-gray-300 py-1.5 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 text-sm pl-2 pr-8"
+                  >
+                    <option value="Express Shipping">Express Shipping</option>
+                    <option value="Standard Shipping">Standard Shipping</option>
+                    <option value="Priority Shipping">Priority Shipping</option>
+                    <option value="Overnight Shipping">
+                      Overnight Shipping
+                    </option>
+                  </select>
+                  <span
+                    class="absolute right-0 top-0 h-full w-10 text-center text-gray-600 pointer-events-none flex items-center justify-center"
+                  >
+                    <svg
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      class="w-4 h-4"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M6 9l6 6 6-6"></path>
+                    </svg>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="column-right w-1/3">
+              <div class="form-grp py-1 border-b border-gray-300">
+                <input
+                  type="hidden"
+                  name="book_title"
+                  value="{{book_data.book_title}}"
+                />
+                <span class="leading-7 text-base text-gray-700"
+                  >{{book_data.book_title}}</span
+                >
+              </div>
+
+              <div class="form-grp py-1 border-b border-gray-300">
+                <input
+                  type="hidden"
+                  name="book_type"
+                  value="{{book_data.book_type}}"
+                />
+                <div
+                  class="flex flex-wrap justify-between leading-7 text-sm text-gray-600"
+                >
+                  <span>Book Type : </span>
+                  <span>{{book_data.book_type}}</span>
+                </div>
+              </div>
+              <div class="form-grp py-1 border-b border-gray-300">
+                <input
+                  type="hidden"
+                  name="quantity"
+                  value="{{book_data.quantity}}"
+                />
+                <div
+                  class="flex flex-wrap justify-between leading-7 text-sm text-gray-600"
+                >
+                  <span>Quantity : </span>
+                  <span>{{book_data.quantity}}</span>
+                </div>
+              </div>
+              <div class="form-grp py-1 border-b border-gray-300">
+                <input
+                  type="hidden"
+                  name="book-price"
+                  value="{{book_data.total_price}}"
+                />
+                <div
+                  class="flex flex-wrap justify-between leading-7 text-sm text-gray-600"
+                >
+                  <span>Price : </span>
+                  <span
+                    >₹<span id="book-price">{{book_data.total_price}}</span
+                    >/-</span
+                  >
+                </div>
+              </div>
+              <div class="form-grp py-1 border-b border-gray-400">
+                <input
+                  type="hidden"
+                  name="shipping-charges"
+                  id="shipping-charges-in"
+                  value="50"
+                />
+                <div
+                  class="flex flex-wrap justify-between leading-7 text-sm text-gray-600"
+                >
+                  <span>Shipping Charges : </span>
+                  <span>₹<span id="shipping-charges">50</span>/-</span>
+                </div>
+              </div>
+              <div class="form-grp py-1 border-t mt-1 border-gray-400">
+                <input
+                  type="hidden"
+                  name="total-price"
+                  id="total-price-in"
+                  value=""
+                />
+                <div
+                  class="flex flex-wrap justify-between leading-7 text-sm text-gray-600"
+                >
+                  <span>Total Price : </span>
+                  <span>₹<span id="total-price"></span>/-</span>
+                </div>
+              </div>
+              <div class="form-grp py-1 border-t border-gray-400">
+                <input
+                  type="hidden"
+                  name="shipping-date"
+                  id="shipping-date-in"
+                  value=""
+                />
+                <div
+                  class="flex flex-wrap justify-between leading-7 text-sm text-gray-600"
+                >
+                  <span>Shipping Date : </span>
+                  <span id="shipping-date"></span>
+                </div>
+              </div>
+              <button
+                type="submit"
+                class="text-white bg-indigo-500 border-0 w-full mt-2 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded text-sm"
+              >
+                Place Order
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <footer class="text-gray-600 body-font">
+      <div
+        class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col"
+      >
+        <a
+          class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900"
+        >
+          <div class="logo-block">
+            <img src="/static/logoNew.png" class="nav-logo" alt="logo" />
+            <span class="navbar-brand">
+              Book<span class="lgt-grey">Wise</span>
+            </span>
+          </div>
+        </a>
+        <p
+          class="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4"
+        >
+          © 2023 AI. —
+          <a
+            href="https://twitter.com/knyttneve"
+            class="text-gray-600 ml-1"
+            rel="noopener noreferrer"
+            target="_blank"
+            >@Malro</a
+          >
+        </p>
+        <span
+          class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start"
+        >
+          <a class="text-gray-500">
+            <svg
+              fill="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              class="w-5 h-5"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"
+              ></path>
+            </svg>
+          </a>
+          <a class="ml-3 text-gray-500">
+            <svg
+              fill="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              class="w-5 h-5"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"
+              ></path>
+            </svg>
+          </a>
+          <a class="ml-3 text-gray-500">
+            <svg
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              class="w-5 h-5"
+              viewBox="0 0 24 24"
+            >
+              <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+              <path
+                d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"
+              ></path>
+            </svg>
+          </a>
+          <a class="ml-3 text-gray-500">
+            <svg
+              fill="currentColor"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="0"
+              class="w-5 h-5"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke="none"
+                d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"
+              ></path>
+              <circle cx="4" cy="4" r="2" stroke="none"></circle>
+            </svg>
+          </a>
+        </span>
+      </div>
+    </footer>
+
+    <script>
+      const shipping_method = document.getElementById("shipping-method");
+      const shipping_charges = document.getElementById("shipping-charges");
+      const shipping_charges_in = document.getElementById(
+        "shipping-charges-in"
+      );
+      const book_price = document.getElementById("book-price");
+      const total_price = document.getElementById("total-price");
+      const shipping_date = document.getElementById("shipping-date");
+      const shipping_date_in = document.getElementById("shipping-date-in");
+      const total_price_in = document.getElementById("total-price-in");
+
+      shipping_method.addEventListener("change", function () {
+        if (shipping_method.value === "Standard Shipping") {
+          shipping_charges.innerText = 30;
+          shipping_charges_in.value = 30;
+          updateShippingDate(6);
+        } else if (shipping_method.value === "Express Shipping") {
+          shipping_charges.innerText = 50;
+          shipping_charges_in.value = 50;
+          updateShippingDate(3);
+        } else if (shipping_method.value === "Priority Shipping") {
+          shipping_charges.innerText = 80;
+          shipping_charges_in.value = 80;
+          updateShippingDate(2);
+        } else if (shipping_method.value === "Overnight Shipping") {
+          shipping_charges.innerText = 120;
+          shipping_charges_in.value = 120;
+          updateShippingDate(1); // Next day
+        }
+        updateTotalPrice();
+      });
+
+      function updateTotalPrice() {
+        total_price.innerText =
+          parseInt(book_price.innerText) + parseInt(shipping_charges.innerText);
+        total_price_in.value =
+          parseInt(book_price.innerText) + parseInt(shipping_charges.innerText);
+      }
+
+      function updateShippingDate(daysAhead) {
+        const today = new Date();
+        const shippingDate = new Date(today);
+        shippingDate.setDate(today.getDate() + daysAhead);
+
+        const day = ("0" + shippingDate.getDate()).slice(-2);
+        const month = ("0" + (shippingDate.getMonth() + 1)).slice(-2);
+        const year = shippingDate.getFullYear().toString().slice(-2);
+
+        // Modify this line for DD-MM-YYYY or DD-MM-YY format
+        const formattedDate = `${day}-${month}-${year}`;
+
+        // Set the shipping date in the HTML
+        shipping_date.innerText = formattedDate;
+        shipping_date_in.value = formattedDate;
+      }
+
+      updateShippingDate(3);
+      updateTotalPrice();
+    </script>
+  </body>
+</html>

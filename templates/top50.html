@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Book Recommender System</title>
+    <link rel="stylesheet" href="/static/style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/static/window.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/static/main.js"></script>
+  </head>
+
+  <body>
+    <div class="regionPrimaryNav">
+      <div class="wrapper">
+        <nav class="nav">
+          <a class="logo-block" href="/">
+            <img src="/static/logoNew.png" class="nav-logo" alt="logo" />
+            <span class="navbar-brand">
+              Book<span class="lgt-grey">Wise</span>
+            </span>
+          </a>
+          <ul class="navbar-nav">
+            <li>
+              <a class="nav-links" style="color: #52616b" href="/top50"
+                ><span>#</span>Top50</a
+              >
+            </li>
+            <li>
+              <a class="nav-links" href="/recommend">Recommend</a>
+            </li>
+            <li>
+              <a class="nav-links" href="/aboutUs">About Us</a>
+            </li>
+            {% if not user_data[0] %}
+            <li>
+              <div class="user-block">
+                <a class="user-btn log-btn" href="/signUp">Sign Up</a>
+                <a class="user-btn sign-btn" href="/loginPage">Log In</a>
+              </div>
+            </li>
+            {% endif %} {% if user_data[0] %}
+            <li>
+              <div class="user-dropdown">
+                <a class="profile-link" href="#">
+                  <div id="profile-picture">{{ user_data[2] }}</div>
+                </a>
+                <div class="user-profile-dropdown">
+                  <div class="pro-grp">
+                    <a class="pro-user">
+                      <div class="pro-img">{{ user_data[2] }}</div>
+                      <div>
+                        <h2>{{ user_data[1] }}</h2>
+                        <p>{{ user_data[3] }}</p>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="pro-grp">
+                    <a href="/logout">Logout</a>
+                  </div>
+                </div>
+              </div>
+            </li>
+            {% endif %}
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+    <div class="regionTop50">
+      <div class="modal">
+        <div class="wrapper">
+          <div class="top50-container">
+            <h2 class="title">Top 50 Books</h2>
+
+            <div class="books-container">
+              {% for book in range(book_name|length) %}
+              <div class="card cursor book-link">
+                <div class="card-content">
+                  <img class="books-img" src="{{ image[book] }}" alt="blog" />
+                  <div class="book-info">
+                    <div>
+                      <h2 class="book-title">{{ book_name[book] }}</h2>
+                      <p class="card-info book-author">{{ author[book] }}</p>
+                    </div>
+                    <div>
+                      <p class="card-info">Votes - {{ votes[book] }}</p>
+                      <p class="card-info">Rating - {{ rating[book] }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+            <div class="none window-popper">
+              <div class="window-container">
+                <div id="window" class="window">
+                  <div class="window-close">
+                    <span>+</span>
+                  </div>
+                  <div class="window-left">
+                    <img
+                      src="/static/img/ines-sayadi-w40TSnenN3s-unsplash.jpg"
+                      alt=""
+                      class="window-book-img"
+                      id="window-book-img"
+                    />
+                    <h2 id="window-title">Book Title</h2>
+                    <p id="window-author">Book Author</p>
+                  </div>
+                  <div class="window-right">
+                    <div>
+                      <h3>Book Summary</h3>
+                      <p class="tracking-wide" id="window-summary">
+                        "Harry Potter and the Prisoner of Azkaban" follows
+                        Harry's return to Hogwarts, where he learns about the
+                        escape of Sirius Black, a dangerous criminal. The book
+                        introduces Dementors and the Marauder's Map, offering a
+                        darker tone in the series. As Harry unravels his past
+                        and his connection to Black, it's a pivotal installment
+                        that combines mystery and magic.
+                      </p>
+                    </div>
+                    <div class="window-btn-block">
+                      <a href="" target="_blank" id="buy-now-btn">Buy Now</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 
+        <div class="books-container">
+        {% for i in range(book_name|length) %}
+        <div class="books-shell">
+          <div class="card">
+            <div class="card-body">
+              <img class="card-img-top" src="{{ image[i] }}" />
+              <p class="text-white">{{ book_name[i] }}</p>
+              <p class="text-white">{{ author[i] }}</p>
+              <p class="text-white">Votes - {{ votes[i] }}</p>
+              <p class="text-white">Rating - {{ rating[i] }}</p>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div> 
+    --></div>
+
+    <footer class="text-gray-600 body-font">
+      <div
+        class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col"
+      >
+        <a
+          class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900"
+        >
+          <div class="logo-block">
+            <img src="/static/logoNew.png" class="nav-logo" alt="logo" />
+            <span class="navbar-brand">
+              Book<span class="lgt-grey">Wise</span>
+            </span>
+          </div>
+        </a>
+        <p
+          class="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4"
+        >
+          © 2023 AI. —
+          <a
+            href="https://twitter.com/knyttneve"
+            class="text-gray-600 ml-1"
+            rel="noopener noreferrer"
+            target="_blank"
+            >@Malro</a
+          >
+        </p>
+        <span
+          class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start"
+        >
+          <a class="text-gray-500">
+            <svg
+              fill="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              class="w-5 h-5"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"
+              ></path>
+            </svg>
+          </a>
+          <a class="ml-3 text-gray-500">
+            <svg
+              fill="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              class="w-5 h-5"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"
+              ></path>
+            </svg>
+          </a>
+          <a class="ml-3 text-gray-500">
+            <svg
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              class="w-5 h-5"
+              viewBox="0 0 24 24"
+            >
+              <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+              <path
+                d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"
+              ></path>
+            </svg>
+          </a>
+          <a class="ml-3 text-gray-500">
+            <svg
+              fill="currentColor"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="0"
+              class="w-5 h-5"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke="none"
+                d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"
+              ></path>
+              <circle cx="4" cy="4" r="2" stroke="none"></circle>
+            </svg>
+          </a>
+        </span>
+      </div>
+    </footer>
+  </body>
+</html>

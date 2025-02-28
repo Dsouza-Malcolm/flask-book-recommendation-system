@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="/static/style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <title>Log In</title>
+    <style>
+      body {
+        background-color: #1e2022;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="log-container">
+      <div class="login-form">
+        <a
+          style="justify-content: start; margin-bottom: 50px"
+          class="logo-block"
+          href="/"
+        >
+          <!-- <img src="/static/logoNew.png" class="nav-logo" alt="logo" /> -->
+          <span style="color: #52616b; margin: none" class="navbar-brand">
+            Book<span class="lgt-grey">Wise</span>
+          </span>
+        </a>
+        <h2>Login to your Account</h2>
+
+        <form action="/login" method="post">
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Username"
+          />
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Password"
+          />
+          <a href="#">Forget Password?</a>
+          <button type="submit">Log in</button>
+        </form>
+        {% with messages = get_flashed_messages(with_categories=true) %} {% if
+        messages %}
+        <div class="failed">
+          {% for category, message in messages %}
+          <div class="alert alert-{{ category }}" style="white-space: pre-line">
+            {{ message|safe }}
+          </div>
+          {% endfor %}
+        </div>
+        {% endif %} {% endwith %}
+      </div>
+      <div class="image-block">
+        <img
+          src="/static/img/valentin-antonini-0eTLk6dA_Ds-unsplash.jpg "
+          alt="Image"
+        />
+      </div>
+    </div>
+  </body>
+</html>

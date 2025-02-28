@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Book Recommender System</title>
+    <link rel="stylesheet" href="/static/style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      .navbar-nav li {
+        padding: 1.2rem 1.6rem;
+      }
+    </style>
+  </head>
+  <body class="body">
+    <div class="regionPrimaryNav">
+      <div class="wrapper">
+        <nav class="nav">
+          <a class="logo-block" href="/">
+            <img src="/static/logoNew.png" class="nav-logo" alt="logo" />
+            <span class="navbar-brand">
+              Book<span class="lgt-grey">Wise</span>
+            </span>
+          </a>
+          <ul class="navbar-nav">
+            <li>
+              <a class="nav-links" href="/top50"><span>#</span>Top50</a>
+            </li>
+            <li>
+              <a class="nav-links" href="/recommend">Recommend</a>
+            </li>
+            <li>
+              <a class="nav-links" href="#">About Us</a>
+            </li>
+            <li>
+              <div class="user-dropdown">
+                <a class="profile-link" href="#">
+                  <div id="profile-picture">{{ profile_picture }}</div>
+                </a>
+                <div class="user-profile-dropdown">
+                  <div class="pro-grp">
+                    <a class="pro-user">
+                      <div class="pro-img">{{profile_picture}}</div>
+                      <div>
+                        <h2>{{full_name}}</h2>
+                        <p>{{user_email}}</p>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="pro-grp">
+                    <a href="/logout">Logout</a>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+    <div class="regionMain">
+      <div class="wrapper">
+        <div class="hero-section">
+          <div class="left-section">
+            <div class="top">
+              <h1 class="hero-title">
+                Discover your <span class="drk-gry">next read</span> with AI's
+                help.
+              </h1>
+            </div>
+            <div class="bottom">
+              <p class="hero-para">
+                Your book journey starts here. Get personalized reads
+                <span class="code lgt-gry"> <code>powered by AI</code></span
+                >.
+                <br />
+                Explore your next favorite book now!
+              </p>
+
+              <button
+                type="button"
+                style="background-color: #52616b"
+                class="exp-btn"
+              >
+                Explore More
+              </button>
+            </div>
+          </div>
+          <div class="right-section">
+            <img
+              src="/static/books-illustrator.png"
+              alt="books-illustrator"
+              class="books-illustrator"
+            />
+          </div>
+        </div>
+
+        <!-- <div class="container">
+          <h2 class="title">Top 50 Books</h2>
+
+          <div class="books-container">
+            {% for i in range(book_name|length) %}
+            <div class="books-shell">
+              <div class="card">
+                <div class="card-body">
+                  <img class="card-img-top" src="{{ image[i] }}" />
+                  <p class="text-white">{{ book_name[i] }}</p>
+                  <p class="text-white">{{ author[i] }}</p>
+                  <p class="text-white">Votes - {{ votes[i] }}</p>
+                  <p class="text-white">Rating - {{ rating[i] }}</p>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div> -->
+      </div>
+    </div>
+
+    <footer class="text-gray-600 body-font">
+      <div
+        class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col"
+      >
+        <a
+          class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900"
+        >
+          <div class="logo-block">
+            <img src="/static/logoNew.png" class="nav-logo" alt="logo" />
+            <span class="navbar-brand">
+              Book<span class="lgt-grey">Wise</span>
+            </span>
+          </div>
+        </a>
+        <p
+          class="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4"
+        >
+          © 2023 AI. —
+          <a
+            href="https://twitter.com/knyttneve"
+            class="text-gray-600 ml-1"
+            rel="noopener noreferrer"
+            target="_blank"
+            >@Malro</a
+          >
+        </p>
+        <span
+          class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start"
+        >
+          <a class="text-gray-500">
+            <svg
+              fill="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              class="w-5 h-5"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"
+              ></path>
+            </svg>
+          </a>
+          <a class="ml-3 text-gray-500">
+            <svg
+              fill="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              class="w-5 h-5"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"
+              ></path>
+            </svg>
+          </a>
+          <a class="ml-3 text-gray-500">
+            <svg
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              class="w-5 h-5"
+              viewBox="0 0 24 24"
+            >
+              <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+              <path
+                d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"
+              ></path>
+            </svg>
+          </a>
+          <a class="ml-3 text-gray-500">
+            <svg
+              fill="currentColor"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="0"
+              class="w-5 h-5"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke="none"
+                d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"
+              ></path>
+              <circle cx="4" cy="4" r="2" stroke="none"></circle>
+            </svg>
+          </a>
+        </span>
+      </div>
+    </footer>
+
+    <!-- <script>
+    </script> -->
+  </body>
+</html>

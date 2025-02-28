@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Sign Up</title>
+  </head>
+  <body>
+    <div class="regionPrimaryNav">
+      <div class="wrapper">
+        <nav class="nav">
+          <a class="logo-block" href="/">
+            <img src="/static/logoNew.png" class="nav-logo" alt="logo" />
+            <span class="navbar-brand">
+              Book<span class="lgt-grey">Wise</span>
+            </span>
+          </a>
+          <ul class="navbar-nav">
+            <li>
+              <a class="nav-links" href="/top50"><span>#</span>Top50</a>
+            </li>
+            <li>
+              <a class="nav-links" href="/recommend">Recommend</a>
+            </li>
+            <li>
+              <a class="nav-links" href="#">About Us</a>
+            </li>
+            <li>
+              <div class="user-block">
+                <a class="user-btn log-btn" href="/signUp">Sign Up</a>
+                <a class="user-btn sign-btn" href="/loginPage">Log In</a>
+              </div>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+    <div class="regionSignUp">
+      <div class="wrapper">
+        <div class="signup-container">
+          <div class="signup-left">
+            <img
+              src="/static/img/ines-sayadi-w40TSnenN3s-unsplash.jpg"
+              alt=""
+            />
+          </div>
+          <div class="signup-right">
+            <h1>Create Your Account</h1>
+            <form method="POST" action="/signup" id="signup-form">
+              <div class="signup-form">
+                <div class="left-section">
+                  <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input
+                      type="password"
+                      id="password"
+                      name="password"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="right-section">
+                  <div class="form-group">
+                    <label for="full-name">Full Name:</label>
+                    <input
+                      type="text"
+                      id="full-name"
+                      name="full-name"
+                      required
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="date-of-birth">Date of Birth:</label>
+                    <input
+                      type="date"
+                      id="date-of-birth"
+                      name="date-of-birth"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="gender">Gender:</label>
+                    <select style="color: #52616b" id="gender" name="gender">
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                      <option value="Other">Other</option>
+                      <option value="Prefer not to say">
+                        Prefer not to say
+                      </option>
+                    </select>
+                  </div>
+
+                  <!-- <div class="form-group">
+                  <label for="confirm-password">Confirm Password:</label>
+                  <input
+                    type="password"
+                    id="confirm-password"
+                    name="confirm-password"
+                    required
+                  />
+                </div> -->
+                </div>
+              </div>
+              <div class="form-group">
+                <input
+                  type="checkbox"
+                  id="terms-accepted"
+                  name="terms-accepted"
+                  required
+                />
+                <label class="terms-label" for="terms-accepted">
+                  I accept the terms and conditions
+                </label>
+              </div>
+              <button class="sign-up-btn" id="signup-button" type="submit">
+                Sign Up
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const signupForm = document.getElementById("signup-form");
+      const inputElements = signupForm.querySelectorAll("input");
+      const genderSelect = document.getElementById("gender");
+      const signupButton = document.getElementById("signup-button");
+      let lastClickedInput = null;
+
+      // Function to change label color for the clicked input
+      function handleInputClick(event) {
+        if (lastClickedInput) {
+          const lastLabel = lastClickedInput.previousElementSibling;
+          lastLabel.classList.remove("focused");
+        }
+
+        const label = event.target.previousElementSibling;
+        label.classList.add("focused");
+        lastClickedInput = event.target;
+      }
+
+      // Attach click event listeners to all input elements
+      inputElements.forEach((input) => {
+        input.addEventListener("click", handleInputClick);
+      });
+
+      // send data from client to backend
+      // Function to send user data to the backend
+      // function sendUserData(event) {
+      //   event.preventDefault(); // Prevent the default form submission
+
+      //   const username = document.getElementById("username").value;
+      //   const email = document.getElementById("email").value;
+      //   const password = document.getElementById("password").value;
+      //   const fullName = document.getElementById("full-name").value;
+      //   const dob = document.getElementById("date-of-birth").value;
+      //   const gender = genderSelect.value;
+      //   const termsAccepted = document.getElementById("terms-accepted").value;
+
+      //   // Extract the first letters of the first name and last name
+      //   const nameParts = fullName.split(" ");
+      //   const firstName = nameParts[0];
+      //   const lastName = nameParts.length > 1 ? nameParts[1] : "";
+      //   const logo = firstName.charAt(0) + lastName.charAt(0);
+
+      //   // Create an object with user data
+      //   const userData = {
+      //     username,
+      //     email,
+      //     password,
+      //     "full-name": fullName,
+      //     "date-of-birth": dob,
+      //     gender,
+      //     "terms-accepted": termsAccepted,
+      //     logo,
+      //   };
+
+      //   // Send an HTTP POST request to your server
+      //   fetch("/submitUserData", {
+      //     method: "POST",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //     body: JSON.stringify(userData),
+      //   })
+      //     .then((response) => response.json())
+      //     .then((data) => {
+      //       // Handle the response from the server
+      //       console.log(data);
+      //       // You can redirect the user or show a success message here
+      //     })
+      //     .catch((error) => {
+      //       // Handle any errors
+      //       console.error("Error:", error);
+      //     });
+      // }
+
+      // // Attach the submit event listener to the form's submit button
+      // signupButton.addEventListener("click", sendUserData);
+    </script>
+  </body>
+</html>
